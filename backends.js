@@ -1,6 +1,7 @@
 import config from "./config"
 
 import { Peer, Messages, Inventory } from "b2p2p"
+import bitwork from "bitwork"
 import bsv from "bsv"
 import txo from "txo"
 
@@ -114,5 +115,22 @@ export class B2P2PBackend extends Backend {
         });
 
         this.peer.connect()
+    }
+}
+
+export class BitworkBackend extends Backend {
+
+    constructor() {
+        super();
+        // Remember to replace the "user" and "pass" with your OWN JSON-RPC username and password!
+        const bit = new bitwork({ rpc: config.rpc, peer: config.peer });
+        bit.on("ready", async () => {
+            bit.on("mempool", (e) => {
+                console.log(e.tx)
+            })
+
+            this.ready();
+        })
+
     }
 }

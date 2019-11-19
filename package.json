@@ -19,8 +19,11 @@
   "dependencies": {
     "b2p2p": "0.0.1",
     "bitindex-sdk": "3.3.1",
-    "bsv": "1.0.0",
-    "txo": "0.0.16"
+    "bitwork": "synfonaut/bitwork",
+    "txo": "synfonaut/txo"
+  },
+  "peerDependencies": {
+    "bsv": "^1.0.0"
   },
   "devDependencies": {
     "esm": "3.2.25"

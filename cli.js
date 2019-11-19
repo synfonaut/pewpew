@@ -6,7 +6,7 @@ import config from "./config"
 import { fire } from "./fire"
 import { split } from "./split"
 import { utxos } from "./utxos"
-import { B2P2PBackend } from "./backends"
+import { B2P2PBackend, BitworkBackend } from "./backends"
 
 if (require.main == module) {
     if (process.argv[2] == "split") {
@@ -40,7 +40,7 @@ if (require.main == module) {
         prompt.on("line", async function(line) {
             if (line == "y") {
                 console.log("🔫 FIRE AT WILL");
-                const backend = new B2P2PBackend();
+                const backend = new BitworkBackend();
                 backend.ready = function() {
                     console.log("backend ready");
                     fire(config.wif, num, satoshis, target, backend).catch(e => {
