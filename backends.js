@@ -50,7 +50,6 @@ class Backend {
 
     reset() {
         this.clear();
-        this.peer.disconnect();
     }
 
     wait(max=100) {
@@ -116,21 +115,36 @@ export class B2P2PBackend extends Backend {
 
         this.peer.connect()
     }
+
+    reset() {
+        this.clear();
+        this.peer.disconnect();
+    }
+
 }
 
 export class BitworkBackend extends Backend {
 
     constructor() {
         super();
-        // Remember to replace the "user" and "pass" with your OWN JSON-RPC username and password!
-        const bit = new bitwork({ rpc: config.rpc, peer: config.peer });
-        bit.on("ready", async () => {
-            bit.on("mempool", (e) => {
-                console.log(e.tx)
+
+        this.bit = new bitwork({ rpc: config.rpc, peer: config.peer });
+        this.bit.use("parse", "txo");
+        this.bit.on("ready", async () => {
+            this.bit.on("mempool", (e) => {
+                if (this.has(e.tx.h)) {
+                    this.complete(e.tx.h);
+                }
             })
 
             this.ready();
         })
 
     }
+
+    reset() {
+        this.clear();
+        this.bit.peer.disconnect();
+    }
+
 }

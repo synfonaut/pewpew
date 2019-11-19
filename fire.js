@@ -1,5 +1,6 @@
 import config from "./config"
 import { sendtx } from "./send"
+import { utxos as getutxos } from "./utxos"
 
 import bsv from "bsv";
 const bitindex = require('bitindex-sdk').instance();
@@ -17,6 +18,11 @@ async function fireForUTXO(privateKey, utxo, changeAddress, satoshis, target) {
         .change(changeAddress);
 
     tx.sign(privateKey);
+
+    if (tx.verify() !== true) {
+        console.log("error while verifying tx for utxo", utxo);
+        throw new Error(`error while verifying tx`);
+    }
 
     const txhash = tx.serialize();
 
@@ -42,7 +48,7 @@ export async function fire(wif, num, satoshis, target, backend) {
     const address = bsv.Address.fromPrivateKey(privateKey).toString();
     console.log(`loading private key ${wif} that owns address ${address}`);
 
-    const utxos = await bitindex.address.getUtxos(address);
+    const utxos = await getutxos(wif);
     if (utxos.length < num) { throw new Error(`don't have enough utxos, need to split them`) }
 
     const sats = utxos.map(utxo => { return utxo.satoshis }).reduce((a, b) => a + b, 0);

@@ -17,7 +17,7 @@ if (require.main == module) {
         });
     } else if (process.argv[2] == "fire") {
 
-        const satoshis = 800;
+        const satoshis = 550;
         const target = process.argv[3];
         if (!target) {
             console.log(`ERROR invalid target`);
@@ -44,7 +44,8 @@ if (require.main == module) {
                 backend.ready = function() {
                     console.log("backend ready");
                     fire(config.wif, num, satoshis, target, backend).catch(e => {
-                        console.log(`ERROR while firing transactions ${e.message}`);
+                        console.log(`ERROR while firing transactions`);
+                        console.log(e);
                     });
                 };
             } else {
