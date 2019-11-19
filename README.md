@@ -1,4 +1,4 @@
-# 🔫 Pew Pew
+# Pew Pew
 
 ![Pew Pew — A Bitcoin SV Transaction Shooter](./pewpew.png)
 
