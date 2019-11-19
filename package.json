@@ -1,0 +1,25 @@
+{
+  "name": "pewpew",
+  "version": "0.0.1",
+  "description": "A Bitcoin SV transaction shooter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bsv",
+    "bitcoin",
+    "shooter"
+  ],
+  "author": "synfonaut",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "b2p2p": "0.0.1",
+    "bitindex-sdk": "3.3.1",
+    "bsv": "1.0.0",
+    "txo": "0.0.16"
+  },
+  "devDependencies": {
+    "esm": "3.2.25"
+  }
+}
