@@ -53,7 +53,7 @@ async function splitUTXO(privateKey, utxo, changeAddress, num, satoshis) {
 }
 
 
-export async function split(wif, num, satoshis, maxoutputs=100) {
+export async function split(wif, num, satoshis, maxoutputs=25) {
     console.log("preparing transaction shooter by splitting utxos");
 
     if (!wif) { throw new Error(`shooter requires a wif`) }
