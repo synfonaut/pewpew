@@ -30,6 +30,14 @@ class Backend {
         return Object.values(this.txids).every(txid => txid === true);
     }
 
+    incomplete() {
+        return Object.entries(this.txids).map(([txid, complete]) => {
+            if (!complete) {
+                return txid;
+            }
+        }).filter(txid => txid);
+    }
+
     num() {
         return Object.keys(this.txids).length;
     }
@@ -57,6 +65,9 @@ class Backend {
                 this.reset();
             } else {
                 console.log("WAIT for finish");
+                for (const txid of this.incomplete()) {
+                    console.log("WAIT ON", txid);
+                }
             }
 
             if (++curr > max) {

@@ -10,7 +10,12 @@ async function splitUTXO(privateKey, utxo, changeAddress, num, satoshis) {
     if (!Number.isInteger(satoshis)) { throw new Error(`shooter requires an amount`) }
 
     if (utxo.satoshis <= satoshis) {
-        console.log(`skipping utxo ${utxo.txid}:${utxo.vout}, already split`);
+        //console.log(`skipping utxo ${utxo.txid}:${utxo.vout}, already split`);
+        return 0;
+    }
+
+    if ((satoshis * 2.5) > utxo.satoshis) {
+        //console.log(`skipping utxo ${utxo.txid}:${utxo.vout}, because it's small`);
         return 0;
     }
 
@@ -43,7 +48,7 @@ async function splitUTXO(privateKey, utxo, changeAddress, num, satoshis) {
         throw new Error(`error while sending tx ${result.error}`);
     }
 
-    console.log("split txid", result.result);
+    console.log("SPLIT", `${utxo.txid}:${utxo.vout} into`, numsplit, "utxos in", result.result);
     return result.result;
 }
 
@@ -59,11 +64,19 @@ export async function split(wif, num, satoshis, maxoutputs=100) {
     const address = bsv.Address.fromPrivateKey(privateKey).toString();
     console.log(`loading private key ${wif} that owns address ${address}`);
 
-    const utxos = await bitindex.address.getUtxos(address);
+    const utxos = await bitindex.address.getUtxosWithOptions({
+        addrs: [address],
+        limit: 10000
+    });
+
+    console.log(`${utxos.length} utxos`);
+
     let split = 0;
     for (const utxo of utxos) {
         const numsplit = await splitUTXO(privateKey, utxo, address, maxoutputs, satoshis);
-        console.log(`SPLIT ${numsplit} utxos from ${utxo.txid}:${utxo.vout} into ${satoshis} each`);
+        if (numsplit > 0) {
+            console.log(`SPLIT ${numsplit} utxos from ${utxo.txid}:${utxo.vout} into ${satoshis} each`);
+        }
         split += numsplit;
         if (split >= num) {
             console.log("SUCCESS splitting utxo");
