@@ -1,6 +1,6 @@
 # 🔫 Pew Pew
 
-![Pew Pew — A Bitcoin SV Transaction Shooter](./pewpew.jpg)
+![Pew Pew — A Bitcoin SV Transaction Shooter](./pewpew.png)
 
 Pew Pew is a Bitcoin SV transaction shooter, it sends many transactions quickly to a Bitcoin SV address.
 
