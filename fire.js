@@ -1,4 +1,7 @@
-const bsv = require("bsv");
+import config from "./config"
+import { sendtx } from "./send"
+
+import bsv from "bsv";
 const bitindex = require('bitindex-sdk').instance();
 
 async function fireForUTXO(privateKey, utxo, changeAddress, satoshis, target) {
@@ -17,15 +20,15 @@ async function fireForUTXO(privateKey, utxo, changeAddress, satoshis, target) {
 
     const txhash = tx.serialize();
 
-    const result = await bitindex.tx.send(txhash);
+    //const result = await bitindex.tx.send(txhash);
+    const result = await sendtx(txhash);
 
-    console.log("RESULT", result);
-
-    if (!result || !result.txid) {
-        return null;
+    if (result.error) {
+        console.log("error while sending tx for utxo", utxo);
+        throw new Error(`error while sending tx ${result.error}`);
     }
 
-    return result.txid;
+    return result.result;
 }
 
 export async function fire(wif, num, satoshis, target) {
@@ -48,10 +51,17 @@ export async function fire(wif, num, satoshis, target) {
     const expectedSpend = (num * satoshis);
     if (expectedSpend > sats) { throw new Error(`don't have enough money to send ${expectedSpend} satoshis to ${target}`) }
 
-    for (var i = 1; i <= num; i++) {
-        const txid = await fireForUTXO(privateKey, utxos[0], address, satoshis, target);
+    let curr = 0;
+    for (const utxo of utxos) {
+        const txid = await fireForUTXO(privateKey, utxo, address, satoshis, target);
         if (!txid) { throw new Error(`error firing tx to target`) }
+        curr += 1;
         console.log(`successfully fired tx to target ${txid}`);
+
+        if (curr >= num) {
+            console.log(`SUCCESS hit ${curr}/${num} targets`);
+            break;
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 const bsv = require("bsv");
 const bitindex = require('bitindex-sdk').instance();
+import { sendtx } from "./send"
 
 async function splitUTXO(privateKey, utxo, changeAddress, num, satoshis) {
     if (!privateKey) { throw new Error(`shooter requires a privateKey`) }
@@ -35,18 +36,19 @@ async function splitUTXO(privateKey, utxo, changeAddress, num, satoshis) {
 
     const txhash = tx.serialize();
 
-    const result = await bitindex.tx.send(txhash);
-    if (!result || !result.txid) {
-        return 0;
+    const result = await sendtx(txhash);
+
+    if (result.error) {
+        console.log("error while sending tx for utxo", utxo);
+        throw new Error(`error while sending tx ${result.error}`);
     }
 
-    console.log("split txid", result.txid);
-
-    return numsplit;
+    console.log("split txid", result.result);
+    return result.result;
 }
 
 
-export async function split(wif, num, satoshis) {
+export async function split(wif, num, satoshis, maxoutputs=100) {
     console.log("preparing transaction shooter by splitting utxos");
 
     if (!wif) { throw new Error(`shooter requires a wif`) }
@@ -60,7 +62,7 @@ export async function split(wif, num, satoshis) {
     const utxos = await bitindex.address.getUtxos(address);
     let split = 0;
     for (const utxo of utxos) {
-        const numsplit = await splitUTXO(privateKey, utxo, address, num, satoshis);
+        const numsplit = await splitUTXO(privateKey, utxo, address, maxoutputs, satoshis);
         console.log(`SPLIT ${numsplit} utxos from ${utxo.txid}:${utxo.vout} into ${satoshis} each`);
         split += numsplit;
         if (split >= num) {
