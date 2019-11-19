@@ -31,7 +31,7 @@ async function fireForUTXO(privateKey, utxo, changeAddress, satoshis, target) {
     return result.result;
 }
 
-export async function fire(wif, num, satoshis, target) {
+export async function fire(wif, num, satoshis, target, backend) {
     console.log("starting transaction shooter");
     if (!wif) { throw new Error(`shooter requires a wif`) }
     if (!target) { throw new Error(`shooter requires a target`) }
@@ -55,13 +55,18 @@ export async function fire(wif, num, satoshis, target) {
     for (const utxo of utxos) {
         const txid = await fireForUTXO(privateKey, utxo, address, satoshis, target);
         if (!txid) { throw new Error(`error firing tx to target`) }
+
+        backend.add(txid);
+
         curr += 1;
-        console.log(`successfully fired tx to target ${txid}`);
+        console.log(`🔫 FIRE ${txid}`);
 
         if (curr >= num) {
-            console.log(`SUCCESS hit ${curr}/${num} targets`);
+            console.log(`FIRED ${curr}/${num} targets`);
             break;
         }
     }
+
+    backend.wait();
 }
 
