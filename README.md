@@ -42,4 +42,5 @@ You can also specify the number of transactions by running `pewpew fire <target>
 
 ## Author
 
-@synfonaut
+Created by [@synfonaut](https://twitter.com/synfonaut)
+

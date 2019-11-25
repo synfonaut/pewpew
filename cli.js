@@ -17,7 +17,7 @@ if (require.main == module) {
         });
     } else if (process.argv[2] == "fire") {
 
-        const satoshis = 800;
+        const satoshis = 750;
         const target = process.argv[3];
         if (!target) {
             console.log(`ERROR invalid target`);
