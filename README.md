@@ -29,46 +29,71 @@ Fund the address that appears on screen. If you ever need to refer back to this 
 
 Check your balance
 
-
     pewpew balance
 
-Need help?
+Split large utxos into many smaller utxos
 
-    pewpew help
+    pewpew split
+
+🔫 Fire Pew Pew!
+
+    pewpew fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4
 
 
+## Help
+
+    Usage:  [options] [command]
+
+    Options:
+      -V, --version                      output the version number
+      -h, --help                         output usage information
+
+    Commands:
+      generate                           Generate address
+      address                            Display address
+      balance                            Display balance for address
+      utxos                              Display utxos for address
+      split [options]                    Split utxos in preparation for firing
+      fire [options] <address> [number]  Fire Pew Pew, sending num Bitcoin transactions to an address
+
+    Usage:
+      $ pewpew generate
+      $ pewpew address
+      $ pewpew split
+      $ pewpew fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4
 
 
-`git clone https://github.com/synfonaut/pewpew.git`
+## Frequently Asked Questions
 
-`npm install`
+### Where is my private key?
 
-Generate a random private key:
+Your private key is generated on a .bit file in your local directory. If you put funds on it, please back it up.
 
-`node -e "console.log(require('bsv').PrivateKey.fromRandom().toString())"`
+### How do I connect to a remote RPC and Peer?
 
-Create a `config.js` file that points to the node you're using and also includes the generated privateKey in `wif`
+Use the environment variables below to change the node information
 
-    export default {
-        rpc: { host: "127.0.0.1", user: "root", pass: "bitcoin" },
-        peer: { host: "127.0.0.1" },
-        wif: "..."
-    }
+    RPC_HOST=127.0.0.1 RPC_USER=root RPC_PASS=bitcoin PEER_HOST=127.0.0.1 pewpew fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4
 
-## Usage
+### How do I change the nubmer of transactions?
 
-Run `pewpew utxos` to retrieve your address, then send a small amount of BSV to begin sending txs.
+Specify the number after the address
+
+    pewpew fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4 20
+
+### How do I change the amount of satoshis?
+
+Specify the --satoshis flag
+
+    pewpew fire --satoshis 600 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4
+
+### Why are my transactions getting rejected?
+
+Probably because the fee is too low, try sending a lower satoshi amount.
 
 *Disclamer: This is new and untested code, don't send a lot of money without testing first*
 
-Run `pewpew split` to prepare your utxos, each call generates 25 possible firings
-
-Run `pewpew fire <target>` to send transactions to a Bitcoin address.
-
-You can also specify the number of transactions by running `pewpew fire <target> [num]`
-
-
-
 ## Author
 
-Created by [@synfonaut](https://twitter.com/synfonaut)
+Created by [@synfonaut](https://twitter.com/synfonaut) while building [Bit.sv](https://bit.sv).
+
