@@ -20,6 +20,7 @@ program.on('--help', function(){
   console.log('  $ pewpew address');
   console.log('  $ pewpew split');
   console.log('  $ pewpew fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4');
+  console.log('')
 });
 
 async function balance() {

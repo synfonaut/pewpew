@@ -1,13 +1,13 @@
 {
   "name": "pewpew-bitcoin",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Bitcoin SV transaction shooter",
   "main": "index.js",
   "bin": {
       "pewpew": "./bundle.js"
   },
   "scripts": {
-    "build": "./node_modules/.bin/rollup cli.js --file bundle.js --format cjs"
+    "build": "./node_modules/.bin/rollup cli.js --file bundle.js --format cjs && chmod +x bundle.js"
   },
   "keywords": [
     "bsv",
