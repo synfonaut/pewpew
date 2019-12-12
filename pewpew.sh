@@ -1,3 +1,4 @@
 #!/bin/bash
 
-node ./bundle.js
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+node "$DIR/bundle.js"
