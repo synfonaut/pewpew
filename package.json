@@ -20,10 +20,11 @@
     "b2p2p": "0.0.1",
     "bitindex-sdk": "3.3.1",
     "bitwork": "synfonaut/bitwork",
+    "bsv": "^1.0.0",
+    "commander": "4.0.1",
+    "debug": "4.1.1",
+    "qrcode-terminal": "0.12.0",
     "txo": "synfonaut/txo"
-  },
-  "peerDependencies": {
-    "bsv": "^1.0.0"
   },
   "devDependencies": {
     "esm": "3.2.25"

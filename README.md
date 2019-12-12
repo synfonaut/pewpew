@@ -44,3 +44,10 @@ You can also specify the number of transactions by running `pewpew fire <target>
 
 Created by [@synfonaut](https://twitter.com/synfonaut)
 
+
+## Todo
+- Cleanup README
+- Create GIF video
+- NPM publish
+- Tweetstorm
+

@@ -46,9 +46,9 @@ export async function fire(wif, num, satoshis, target, backend) {
 
     const privateKey = bsv.PrivateKey(wif);
     const address = bsv.Address.fromPrivateKey(privateKey).toString();
-    console.log(`loading private key ${wif} that owns address ${address}`);
+    console.log(`loading private key that owns address ${address}`);
 
-    const utxos = await getutxos(wif);
+    const utxos = await getutxos(address);
     if (utxos.length < num) { throw new Error(`don't have enough utxos, need to split them`) }
 
     const sats = utxos.map(utxo => { return utxo.satoshis }).reduce((a, b) => a + b, 0);
@@ -58,6 +58,7 @@ export async function fire(wif, num, satoshis, target, backend) {
     if (expectedSpend > sats) { throw new Error(`don't have enough money to send ${expectedSpend} satoshis to ${target}`) }
 
     let curr = 0;
+    console.log("aim");
     for (const utxo of utxos) {
         const txid = await fireForUTXO(privateKey, utxo, address, satoshis, target);
         if (!txid) { throw new Error(`error firing tx to target`) }

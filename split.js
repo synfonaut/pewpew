@@ -19,6 +19,8 @@ async function splitUTXO(privateKey, utxo, changeAddress, num, satoshis) {
         return 0;
     }
 
+    //console.log(`SPLITING ${JSON.stringify(utxo, null, 4)}`);
+
     const tx = bsv.Transaction().from([utxo]).change(changeAddress);
     let totalsatoshis = 0;
     let numsplit;
