@@ -1,5 +1,5 @@
 {
-  "name": "pewpew",
+  "name": "pewpew-bitcoin",
   "version": "0.0.1",
   "description": "A Bitcoin SV transaction shooter",
   "main": "index.js",

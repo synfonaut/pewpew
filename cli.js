@@ -18,10 +18,10 @@ import { B2P2PBackend, BitworkBackend } from "./backends"
 program.on('--help', function(){
   console.log('')
   console.log('Usage:');
-  console.log('  $ pewpew-bitcoin generate');
-  console.log('  $ pewpew-bitcoin address');
-  console.log('  $ pewpew-bitcoin split');
-  console.log('  $ pewpew-bitcoin fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4');
+  console.log('  $ pewpew generate');
+  console.log('  $ pewpew address');
+  console.log('  $ pewpew split');
+  console.log('  $ pewpew fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4');
 });
 
 async function balance() {
@@ -85,7 +85,7 @@ program.version("0.0.1");
 program
     .command("generate")
     .description("Generate address")
-    .action(async function(env, options) {
+    .action(async function() {
         let bundle = await bit.fetch();
         if (bundle) {
             log(`already generated address`);
@@ -100,37 +100,38 @@ program
 program
     .command("address")
     .description("Display address")
-    .action(async function(env, options) {
+    .action(async function() {
         address();
     });
 
 program
     .command("balance")
     .description("Display balance for address")
-    .action(async function(env, options) {
+    .action(async function() {
         balance();
     });
 
 program
     .command("utxos")
     .description("Display utxos for address")
-    .action(async function(env, options) {
+    .action(async function() {
         showutxos();
     });
 
 program
     .command("split")
     .description("Split utxos in preparation for firing")
-    .action(async function(env, options) {
+    .option("-s, --satoshis <satoshis>", "Change the number of satoshis to send, by default 1000")
+    .option("-l, --limit <limit>", "Maximum number of utxos, by default 25")
+    .action(async function(args) {
         let bundle = await bit.fetch();
         if (!bundle) {
             log(`error finding address information, please inspect you .bit file`);
             return;
         }
 
-        const satoshis = 1000;
-
-        const limit = 25;
+        const satoshis = (args.satoshis ? Number(args.satoshis) : 1000);
+        const limit = (args.limit ? Number(args.limit) : 25);
 
         split.split(bundle.PRIVATE, limit, satoshis).then(function() {
             console.log("FINISHED splitting utxos");
