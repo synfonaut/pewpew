@@ -93,6 +93,11 @@ Probably because the fee is too low, try sending a lower satoshi amount.
 
 *Disclamer: This is new and experimental code, don't send a lot of money without testing first*
 
+## TODO
+
+- UTXO calculation could be much better, should calculate optimal size
+- P2P
+
 ## Author
 
 Created by [@synfonaut](https://twitter.com/synfonaut) while building [Bit.sv](https://bit.sv).

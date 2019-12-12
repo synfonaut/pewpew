@@ -140,7 +140,7 @@ program
 
 program
     .command("fire <address> [number]")
-    .option("-s, --satoshis <satoshis>", "Change the number of satoshis to send, by default 1000")
+    .option("-s, --satoshis <satoshis>", "Change the number of satoshis to send, by default 800")
     .description("Fire Pew Pew, sending num Bitcoin transactions to an address")
     .action(async function(address, number, args) {
         let bundle = await bit.fetch();
@@ -149,7 +149,7 @@ program
             return;
         }
 
-        const satoshis = (args.satoshis ? Number(args.satoshis) : 1000);
+        const satoshis = (args.satoshis ? Number(args.satoshis) : 800);
         if (!address) {
             console.log(`ERROR invalid address`);
             process.exit();
