@@ -14,10 +14,28 @@ Pew Pew currently requires a Bitcoin node.
 
 ## Setup
 
+First generate the keys in a secure location
+
     mkdir shooter-keys
     cd shooter-keys
 
     pewpew generate
+
+
+Fund the address that appears on screen. If you ever need to refer back to this address, run
+
+    pewpew address
+
+
+Check your balance
+
+
+    pewpew balance
+
+Need help?
+
+    pewpew help
+
 
 
 

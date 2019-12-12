@@ -1,11 +1,9 @@
 {
   "name": "pewpew-bitcoin",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A Bitcoin SV transaction shooter",
   "main": "index.js",
-  "bin": {
-    "pewpew": "./pewpew.sh"
-  },
+  "bin": "./pewpew.sh",
   "scripts": {
     "build": "./node_modules/.bin/rollup cli.js --file bundle.js --format cjs"
   },
