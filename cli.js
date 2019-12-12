@@ -1,5 +1,3 @@
-#!/usr/bin/env node --require esm
-
 const log = require("debug")("pewpew");
 
 import qrcode from "qrcode-terminal"
