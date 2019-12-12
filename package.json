@@ -23,8 +23,8 @@
     "bsv": "^1.0.0",
     "commander": "4.0.1",
     "debug": "4.1.1",
+    "esm": "3.2.25",
     "qrcode-terminal": "0.12.0",
-    "txo": "synfonaut/txo",
-    "esm": "3.2.25"
+    "txo": "synfonaut/txo"
   }
 }
