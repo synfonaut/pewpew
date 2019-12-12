@@ -1,6 +1,6 @@
 {
   "name": "pewpew-bitcoin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Bitcoin SV transaction shooter",
   "main": "index.js",
   "bin": {
@@ -15,7 +15,7 @@
     "shooter"
   ],
   "author": "synfonaut",
-  "license": "UNLICENSED",
+  "license": "LICENSE.md",
   "dependencies": {
     "b2p2p": "0.0.1",
     "bitindex-sdk": "3.3.1",
@@ -24,9 +24,7 @@
     "commander": "4.0.1",
     "debug": "4.1.1",
     "qrcode-terminal": "0.12.0",
-    "txo": "synfonaut/txo"
-  },
-  "devDependencies": {
+    "txo": "synfonaut/txo",
     "esm": "3.2.25"
   }
 }
