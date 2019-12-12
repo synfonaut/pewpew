@@ -2,13 +2,24 @@
 
 ![Pew Pew — A Bitcoin SV Transaction Shooter](https://github.com/synfonaut/pewpew/raw/master/pewpew.png)
 
-Pew Pew is a Bitcoin SV transaction shooter, it sends many transactions quickly to a Bitcoin SV address.
+Pew Pew is a Bitcoin SV transaction shooter, it quickly sends a lot of transactions to a Bitcoin SV address.
 
 It's useful for stress testing and debugging realtime Bitcoin applications.
 
 Pew Pew currently requires a Bitcoin node.
 
+## Install
+
+    npm install pewpew-bitcoin
+
 ## Setup
+
+    mkdir shooter-keys
+    cd shooter-keys
+
+    pewpew generate
+
+
 
 `git clone https://github.com/synfonaut/pewpew.git`
 
