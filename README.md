@@ -69,19 +69,19 @@ Split large utxos into many smaller utxos
 
 Your private key is generated on a .bit file in your local directory. If you put funds on it, please back it up.
 
-### How do I connect to a remote RPC and Peer?
+### How do I connect to a remote node?
 
 Use the environment variables below to change the node information
 
     RPC_HOST=127.0.0.1 RPC_USER=root RPC_PASS=bitcoin PEER_HOST=127.0.0.1 pewpew fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4
 
-### How do I change the nubmer of transactions?
+### How do I change the number of transactions I'm sending?
 
 Specify the number after the address
 
     pewpew fire 1Jpgfg9fFNKVVGxYgUhuKhdbxTSKBUnVf4 20
 
-### How do I change the amount of satoshis?
+### How do I change the amount of satoshis I'm sending?
 
 Specify the --satoshis flag
 
@@ -91,7 +91,7 @@ Specify the --satoshis flag
 
 Probably because the fee is too low, try sending a lower satoshi amount.
 
-*Disclamer: This is new and untested code, don't send a lot of money without testing first*
+*Disclamer: This is new and experimental code, don't send a lot of money without testing first*
 
 ## Author
 
