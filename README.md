@@ -96,6 +96,7 @@ Probably because the fee is too low, try sending a lower satoshi amount.
 ## TODO
 
 - UTXO calculation could be much better, should calculate optimal size
+- Add RPC_PORT env variable
 - P2P
 
 ## Author
